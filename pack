@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+BRANCH=`current_branch`
+hack
+git checkout -b ${BRANCH}_release
+git rebase -i origin/master

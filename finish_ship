@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+BRANCH=`current_branch`
+git checkout master
+git merge $BRANCH
+git push origin master
+git checkout $BRANCH
+if has_remote $BRANCH; then
+  echo "IMPORTANT: Please remember that your local branch has a conflicting history with its remote now, due to rebase onto master. Don't let anyone keep working on the remote; it needs to be blown away via either outright removal or forced push."
+fi
+

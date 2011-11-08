@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+if [ "$1" == "" ]; then
+  git checkout master
+  git pull origin
+  git remote prune origin
+  git branch -r | sed 's/origin[/]//'
+  exit
+fi
+git checkout -t origin/$1

@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+BRANCH=`current_branch`
+git checkout master
+git branch -d $BRANCH
+if has_remote $BRANCH; then
+  git push origin :$BRANCH
+fi
+

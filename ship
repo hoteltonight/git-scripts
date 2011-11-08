@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+BRANCH=`current_branch`
+
+hack
+tar czf ~/shipbackup.tgz --exclude '*.log' .
+
+if git rebase -i origin/master; then
+  finish_ship
+else
+  echo "Looks like you've got some conflicts to deal with. If you successfully finish the rebase, and want to ship the results, run 'finish_ship'."
+fi
+

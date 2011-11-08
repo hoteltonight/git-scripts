@@ -1,0 +1,2 @@
+#!/bin/bash
+ref=$(git symbolic-ref HEAD 2> /dev/null | grep -v '/master$') && echo "${ref#refs/heads/}"

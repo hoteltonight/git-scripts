@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+BRANCH=`current_branch`
+
+hack
+tar czf ~/sharebackup.tgz --exclude '*.log' .
+
+if has_remote $BRANCH; then
+  # Provide an opportunity to squash before pushing; we should already be based on
+  # the last remote-branch commit, and no non-branch (merged) commits should be present in
+  # our local branch that are not in the remote branch, making any available squash safe
+  git rebase -i origin/$BRANCH
+
+  # Check where we were
+  WAS_AT=`git rev-parse HEAD`
+
+  # Now merge in the latest master, right before pushing; this is the only safe time to
+  # merge changes from master, because they will be immediately shared with the remote;
+  # otherwise changes from master not in the remote would appear available for modification
+  # during rebase operations using the remote branch as the base.
+  git pull origin master
+
+  if [ `git rev-parse HEAD` != "$WAS_AT" ]; then
+    # Re-run tests before sharing if we merged new stuff from master
+    test $1
+  fi
+else
+  # If the branch isn't shared, provide a last opportunity to squash, then share it
+  # Due to earlier hack, we should already be based at latest master here
+  git rebase -i origin/master
+fi
+
+git push origin $BRANCH
+
