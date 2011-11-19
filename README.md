@@ -36,7 +36,7 @@ You may want to put some of these handy things in at the same time, but they're 
 
 # The Scripts
 
-### borrow [<branch>]
+### borrow [&lt;branch&gt;]
 
 With no arguments, updates and prunes your list of remotes, and outputs a list of the branches available to you from origin. With one of those branches as an argument, checks out a new tracking local copy of that branch for you.
 
@@ -50,11 +50,11 @@ Create a new *_release branch from your current branch, and interactively rebase
 
 ### runtests
 
-Run your test suite. This is sometimes automatically called from 'share', when it seems advisable to double-check your build in the middle of the share process. You'll probably want to customize this. Should be run manually before 'share' or 'ship' unless you're running autotest or whatever.
+Run your test suite. This is sometimes automatically called from 'share', when it seems advisable to double-check your build in the middle of the share process. You'll probably want to customize this. Should be run manually before 'share' or 'ship' unless you're running autotest, are overconfident, don't like tests, etc.
 
 ### share [-notest]
 
-Publish your work to the remote branch, or a create a remote of your local branch if none exists. Will perform an interactive rebase so you can squash changes, and merge in the latest from master, before pushing. If master has new changes, will invoke runtests after the merge but before the push, unless you ask it not to.
+Publish your work to the remote branch, or a create a remote of your local branch if none exists. Will perform an interactive rebase so you can squash changes, and merge in the latest from master, before pushing. If master has new changes, will invoke 'runtests' after the merge but before the push, unless you ask it not to.
 
 ### ship
 
