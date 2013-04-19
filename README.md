@@ -1,6 +1,6 @@
 Hotel Tonight's git scripts for a workflow most like the GitHub flow.
 
-See this blog post for some context: http://engineering.hoteltonight.com/79320846
+See this blog post for some context: http://engineering.hoteltonight.com/a-hack-ship-git-workflow/
 
 # Installation
 
