@@ -3,7 +3,7 @@ set -e
 BRANCH=`current_branch`
 
 hack
-tar czf ~/shipbackup.tgz --exclude '*.log' .
+#tar czf ~/shipbackup.tgz --exclude '*.log' .
 
 if git rebase -i origin/master; then
   finish_ship

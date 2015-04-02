@@ -1,8 +1,15 @@
 #!/bin/bash
 set -e
 BRANCH=`current_branch`
+
+# force push our branch back, so it auto-closes and links to the PR
+if has_remote $BRANCH; then
+  git push --force origin $BRANCH
+fi
+
 git checkout master
 git merge $BRANCH
+
 git push origin master
 git checkout $BRANCH
 if has_remote $BRANCH; then

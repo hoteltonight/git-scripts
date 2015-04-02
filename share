@@ -3,7 +3,7 @@ set -e
 BRANCH=`current_branch`
 
 hack
-tar czf ~/sharebackup.tgz --exclude '*.log' .
+#tar czf ~/sharebackup.tgz --exclude '*.log' .
 
 if has_remote $BRANCH; then
   # Provide an opportunity to squash before pushing; we should already be based on
@@ -31,4 +31,3 @@ else
 fi
 
 git push origin $BRANCH
-
