@@ -31,3 +31,7 @@ else
 fi
 
 git push origin $BRANCH
+
+if hash hub 2>/dev/null; then
+  hub browse
+fi
