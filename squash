@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+RED='\e[0;31m'
+GREEN='\e[0;32m'
+NC='\e[0m' # No Color
+
+BRANCH=`current_branch`
+MASTER=${1:-master}
+
+printf "Rebasing ${GREEN}${BRANCH}${NC} on ${GREEN}${MASTER}${NC}\n"
+
+git checkout ${MASTER}
+git pull origin
+
+git checkout ${BRANCH}
+git rebase -i origin/${MASTER}
+
+# force push our branch back, so it auto-closes and links to the PR
+if has_remote $BRANCH; then
+  printf "Pushing ${GREEN}${BRANCH}${NC} to ${GREEN}origin${NC}\n"
+  git push --force origin $BRANCH
+fi
+
+printf "${GREEN}Alright!${NC}\n"
